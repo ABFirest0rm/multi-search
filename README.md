@@ -38,12 +38,15 @@ It uses the [SerpAPI](https://serpapi.com/) service to fetch real search results
 
 2. **Create .env in the project root:**
 
-```SERPAPI_KEY=your_actual_serpapi_key_here
+    ```bash
+    SERPAPI_KEY=your_actual_serpapi_key_here
 
 3. **Start the backend**
 
-```node server.js
+    ```bash
+    node server.js
 
 4. **Open in browser**:
 
-```http://localhost:3000
+    ```bash
+    http://localhost:3000
