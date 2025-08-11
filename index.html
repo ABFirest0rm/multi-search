@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multi Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <h1>Multi Search</h1>
+    <button id="dark-mode-btn" aria-label="Toggle dark mode">Dark Mode</button>
+  </header>
+
+  
+  <div class="search-container">
+    <input type="text" id="q" placeholder="Search…">
+    <button id="go">Go</button>
+  </div>
+
+
+  <div id="results" class="results-grid">
+    
+    <div id="google-panel" class="engine-panel result-card">
+      <img class="engine-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+      <div class="engine-results" id="google"></div>
+    </div>
+
+    <div id="bing-panel" class="engine-panel result-card">
+      <img class="engine-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Bing_Fluent_Logo.svg" alt="Bing">
+      <div class="engine-results" id="bing"></div>
+    </div>
+
+    <div id="yahoo-panel" class="engine-panel result-card">
+      <img class="engine-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Yahoo%21_%282019%29.svg" alt="Yahoo">
+      <div class="engine-results" id="yahoo"></div>
+    </div>
+
+    <div id="duckduckgo-panel" class="engine-panel result-card">
+      <img class="engine-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/90/The_DuckDuckGo_Duck.png/600px-The_DuckDuckGo_Duck.png" alt="DuckDuckGo">
+      <div class="engine-results" id="duckduckgo"></div>
+    </div>
+  </div>
+</body>
+
+  
+  <script src="script.js"></script>
+</body>
+</html>

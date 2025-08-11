@@ -1,0 +1,149 @@
+/* ========== Theme vars ========== */
+:root{
+  --bg: #f7f7f8;
+  --text: #1f2328;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #d1d5db;
+  --accent: #0073e6;
+
+  --bg-dark: #0f1115;
+  --text-dark: #e7e7ea;
+  --muted-dark: #9aa4b2;
+  --card-dark: #171a21;
+  --border-dark: #2b3240;
+
+  --header-h: 64px;
+  --search-h: 60px;
+  --field-h: 44px; /* input & button height */
+}
+
+/* ========== Page / dark mode ========== */
+html, body { height: 100%; }
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background .25s, color .25s;
+}
+.dark-mode{
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* ========== Top bar ========== */
+.topbar{
+  position: sticky; top: 0; z-index: 10;
+  height: var(--header-h);
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: 1px solid var(--border);
+  background: inherit; backdrop-filter: blur(4px);
+}
+.dark-mode .topbar{ border-color: var(--border-dark); }
+
+.topbar h1{
+  margin: 0; font-size: 22px; font-weight: 700; letter-spacing: .2px;
+}
+
+/* Dark mode toggle (top-right) */
+#dark-mode-btn{
+  position: absolute; right: 16px; top: 12px;
+  padding: 8px 12px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #2f343f; color: #f1f5f9;
+  cursor: pointer; appearance: none; -webkit-appearance: none;
+}
+#dark-mode-btn:hover{ filter: brightness(1.08); }
+.dark-mode #dark-mode-btn{
+  border-color: var(--border-dark);
+  background: #2a2f3a; color: var(--text-dark);
+}
+
+/* ========== Search row ========== */
+.search-container{
+  height: var(--search-h);
+  display: flex; gap: 10px; align-items: center; justify-content: center;
+  padding: 10px 16px;
+}
+
+.search-container input[type="text"]{
+  height: var(--field-h);
+  width: min(720px, 80vw);
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px 0 0 10px;
+  background: var(--card);
+  color: inherit; box-sizing: border-box;
+  outline: none;
+}
+.dark-mode .search-container input[type="text"]{
+  background: var(--card-dark); border-color: var(--border-dark);
+}
+
+.search-container #go{
+  height: var(--field-h);
+  padding: 0 16px;
+  border: 1px solid var(--border); border-left: none;
+  border-radius: 0 10px 10px 0;
+  background: var(--accent); color: #fff; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.search-container #go:hover{ filter: brightness(.95); }
+.dark-mode .search-container #go{ border-color: var(--border-dark); }
+
+/* ========== Results grid (fills viewport) ========== */
+.results-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px; padding: 12px 16px 24px;
+  min-height: calc(100vh - var(--header-h) - var(--search-h));
+}
+@media (max-width: 1200px){ .results-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px){  .results-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){  .results-grid{ grid-template-columns: 1fr; } }
+
+/* ========== Cards / panels ========== */
+.result-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex; flex-direction: column;
+  min-height: 0; /* allow child to scroll */
+  box-shadow: 0 1px 0 rgba(0,0,0,.02), 0 1px 3px rgba(0,0,0,.06);
+}
+.dark-mode .result-card{
+  background: var(--card-dark); border-color: var(--border-dark);
+  box-shadow: 0 1px 0 rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.25);
+}
+
+/* Logos */
+.engine-logo{
+  max-width: 120px; height: auto; display: block;
+  margin: 0 auto 10px;
+}
+
+/* Scrollable results area that fills leftover space */
+.engine-results{
+  flex: 1; overflow-y: auto; padding-right: 4px;
+  font-size: 14px;
+}
+
+/* List styling */
+.engine-results ul{ list-style: none; margin: 0; padding: 0; }
+.engine-results li{ margin-bottom: 14px; }
+.engine-results a{
+  color: #1976d2; font-weight: 700; text-decoration: none;
+}
+.engine-results a:hover{ text-decoration: underline; }
+.dark-mode .engine-results a{ color: #8ab4f8; }
+
+/* Green display URL + snippet */
+.result-link{
+  font-size: .85em; color: #2e7d32; margin: 4px 0 4px; word-break: break-all;
+}
+.dark-mode .result-link{ color: #81c995; }
+.engine-results p{ margin: 4px 0 0; color: var(--muted); line-height: 1.35; }
+.dark-mode .engine-results p{ color: var(--muted-dark); }
