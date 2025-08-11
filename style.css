@@ -15,10 +15,19 @@
 
   --header-h: 64px;
   --search-h: 60px;
+  --gap: 20px;          /* results grid gap */
+  --pad-x: 16px;        /* grid horizontal padding */
+  --pad-top: 12px;      /* grid top padding */
+  --pad-bottom: 24px;   /* grid bottom padding */
+
   --field-h: 44px; /* input & button height */
 }
 
-/* ========== Page / dark mode ========== */
+/* ========== Base ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
 html, body { height: 100%; }
 body{
   margin: 0;
@@ -74,8 +83,7 @@ body{
   border: 1px solid var(--border);
   border-radius: 10px 0 0 10px;
   background: var(--card);
-  color: inherit; box-sizing: border-box;
-  outline: none;
+  color: inherit; outline: none;
 }
 .dark-mode .search-container input[type="text"]{
   background: var(--card-dark); border-color: var(--border-dark);
@@ -93,25 +101,35 @@ body{
 .search-container #go:hover{ filter: brightness(.95); }
 .dark-mode .search-container #go{ border-color: var(--border-dark); }
 
-/* ========== Results grid (fills viewport) ========== */
+/* ========== Results grid pinned to viewport ========== */
+/* The grid takes the remaining viewport height.
+   We hide grid overflow so cards can scroll internally. */
 .results-grid{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px; padding: 12px 16px 24px;
-  min-height: calc(100vh - var(--header-h) - var(--search-h));
+  gap: var(--gap);
+  padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+  height: calc(100vh - var(--header-h) - var(--search-h));
+  overflow: hidden;           /* prevents page scroll; enables inner scrolls */
 }
+
+/* Responsive columns */
 @media (max-width: 1200px){ .results-grid{ grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px){  .results-grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){  .results-grid{ grid-template-columns: 1fr; } }
 
 /* ========== Cards / panels ========== */
+/* Important bits:
+   - min-height: 0 lets the flex child (.engine-results) actually shrink and scroll
+   - overflow: hidden keeps the card tidy while inner area scrolls */
 .result-card{
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 14px;
   display: flex; flex-direction: column;
-  min-height: 0; /* allow child to scroll */
+  min-height: 0;          /* 👈 critical for nested scrolling */
+  overflow: hidden;       /* tidy rounded corners */
   box-shadow: 0 1px 0 rgba(0,0,0,.02), 0 1px 3px rgba(0,0,0,.06);
 }
 .dark-mode .result-card{
@@ -127,8 +145,21 @@ body{
 
 /* Scrollable results area that fills leftover space */
 .engine-results{
-  flex: 1; overflow-y: auto; padding-right: 4px;
+  flex: 1;                 /* consume remaining card space */
+  min-height: 0;           /* 👈 ensures this area can shrink */
+  overflow-y: auto;        /* 👈 independent scroll per card */
+  padding-right: 4px;
   font-size: 14px;
+}
+
+/* Scrollbar polish (optional) */
+.engine-results::-webkit-scrollbar{ width: 10px; }
+.engine-results::-webkit-scrollbar-track{ background: transparent; }
+.engine-results::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,.15); border-radius: 8px;
+}
+.dark-mode .engine-results::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.2);
 }
 
 /* List styling */

@@ -30,20 +30,6 @@ app.get("/search", async (req, res) => {
     }
 });
 
-// app.get("/search-yahoo-test", async (req, res) => {
-//     const testQuery = "batman";
-//     const url = `https://serpapi.com/search.json?engine=yahoo&p=${encodeURIComponent(testQuery)}&api_key=${process.env.SERPAPI_KEY}`;
-//     console.log("Testing Yahoo URL:", url);
-
-//     try {
-//         const r = await fetch(url);
-//         const data = await r.json();
-//         res.json(data);
-//     } catch (e) {
-//         res.status(500).json({ error: String(e) });
-//     }
-// });
-
 
 const PORT = 3000
 app.listen(PORT, () => {
